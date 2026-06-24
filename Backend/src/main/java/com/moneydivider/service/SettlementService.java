@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import lombok.NonNull;
+
 import com.moneydivider.model.Settlement;
 import com.moneydivider.repository.SettlementRepository;
 
@@ -14,7 +16,7 @@ public class SettlementService {
     @Autowired
     private SettlementRepository settlementRepository;
 
-    public Settlement createSettlement(Settlement settlement) {
+    public Settlement createSettlement(@NonNull Settlement settlement) {
         return settlementRepository.save(settlement);
     }
 
@@ -22,7 +24,7 @@ public class SettlementService {
         return settlementRepository.findAll();
     }
 
-    public Settlement getSettlementById(Long id) {
+    public Settlement getSettlementById(@NonNull Long id) {
         return settlementRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Settlement not found: " + id));
     }
@@ -33,7 +35,7 @@ public class SettlementService {
         return settlementRepository.save(settlement);
     }
 
-    public void deleteSettlement(Long id) {
+    public void deleteSettlement(@NonNull Long id) {
         settlementRepository.deleteById(id);
     }
 }
