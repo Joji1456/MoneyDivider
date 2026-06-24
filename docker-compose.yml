@@ -1,0 +1,30 @@
+version: "3.9"
+
+services:
+  backend:
+    build: ./Backend
+    container_name: moneydivider-backend
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:h2:file:/app/data/moneydivider
+      SPRING_DATASOURCE_DRIVERCLASSNAME: org.h2.Driver
+      SPRING_DATASOURCE_USERNAME: sa
+      SPRING_DATASOURCE_PASSWORD: ""
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_H2_CONSOLE_ENABLED: "true"
+      SPRING_H2_CONSOLE_PATH: /h2-console
+      SPRING_H2_CONSOLE_SETTINGS_WEB_ALLOW_OTHERS: "true"
+    volumes:
+      - h2data:/app/data
+
+  frontend:
+    build: ./frontend
+    container_name: moneydivider-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+
+volumes:
+  h2data:
