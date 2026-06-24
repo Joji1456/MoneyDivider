@@ -1,11 +1,11 @@
-fetch("http://localhost:8080/groups")
+fetch(API_BASE + "/groups")
 .then(res => res.json())
 .then(data => {
     document.getElementById("groups")
             .innerHTML = data.length;
 });
 
-fetch("http://localhost:8080/expenses")
+fetch(API_BASE + "/expenses")
 .then(res => res.json())
 .then(data => {
 

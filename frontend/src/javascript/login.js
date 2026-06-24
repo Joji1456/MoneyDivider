@@ -8,7 +8,7 @@ document.getElementById("loginForm")
         password: document.getElementById("password").value
     };
 
-    fetch("http://localhost:8080/auth/login", {
+    fetch(API_BASE + "/auth/login", {
         method: "POST",
         headers: {
             "Content-Type":

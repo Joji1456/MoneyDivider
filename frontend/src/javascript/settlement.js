@@ -1,6 +1,4 @@
-fetch(
-"http://localhost:8080/settlements"
-)
+fetch(API_BASE + "/settlements")
 .then(res => res.json())
 .then(data => {
 

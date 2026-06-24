@@ -16,7 +16,7 @@ document.getElementById("expenseForm")
         memberIds: [1,2,3,4]
     };
 
-    fetch("http://localhost:8080/expenses", {
+    fetch(API_BASE + "/expenses", {
 
         method: "POST",
 

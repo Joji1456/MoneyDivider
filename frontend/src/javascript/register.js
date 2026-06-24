@@ -12,7 +12,7 @@ document.getElementById("registerForm")
             document.getElementById("password").value
     };
 
-    fetch("http://localhost:8080/users/register", {
+    fetch(API_BASE + "/users/register", {
         method: "POST",
         headers: {
             "Content-Type":

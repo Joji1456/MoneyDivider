@@ -2,7 +2,7 @@ loadGroups();
 
 function loadGroups() {
 
-    fetch("http://localhost:8080/groups")
+    fetch(API_BASE + "/groups")
     .then(res => res.json())
     .then(data => {
 
@@ -34,7 +34,7 @@ document.getElementById("groupForm")
         createdBy: 1
     };
 
-    fetch("http://localhost:8080/groups", {
+    fetch(API_BASE + "/groups", {
 
         method: "POST",
 
