@@ -1,1 +1,1 @@
-const API_BASE = "https://moneydivider-production.up.railway.app";
+const API_BASE = "http://localhost:8080";
