@@ -20,6 +20,23 @@
 </nav>
 
 <div class="container mt-5">
+
+    <!-- Pending and Paid summary cards -->
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <div class="card text-white bg-warning p-3 text-center">
+                <h5>⏳ Pending Settlements</h5>
+                <h2 id="pendingCount">0</h2>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card text-white bg-success p-3 text-center">
+                <h5>✅ Paid Settlements</h5>
+                <h2 id="paidCount">0</h2>
+            </div>
+        </div>
+    </div>
+
     <h3>Create Settlement</h3>
     <form id="settlementForm" class="mb-4">
         <input type="number" id="fromUser" class="form-control mb-3" placeholder="From User ID" required>

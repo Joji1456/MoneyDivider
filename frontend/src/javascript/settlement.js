@@ -8,6 +8,14 @@ function loadSettlements() {
     fetch(API_BASE + "/settlements")
     .then(res => res.json())
     .then(data => {
+        // Count pending and paid
+        const pendingCount = data.filter(s => s.status !== "PAID").length;
+        const paidCount = data.filter(s => s.status === "PAID").length;
+
+        // Show summary counts
+        document.getElementById("pendingCount").innerText = pendingCount;
+        document.getElementById("paidCount").innerText = paidCount;
+
         let rows = "";
         data.forEach(s => {
             const isPaid = s.status === "PAID";
@@ -15,8 +23,8 @@ function loadSettlements() {
                 <td>User ${s.fromUser}</td>
                 <td>User ${s.toUser}</td>
                 <td>₹${s.amount}</td>
-                <td><span class="badge bg-${isPaid ? 'success' : 'warning'}">${s.status || 'PENDING'}</span></td>
-                <td>${isPaid ? '-' : `<button class="btn btn-sm btn-success" onclick="markPaid(${s.id})">Mark Paid</button>`}</td>
+                <td><span class="badge bg-${isPaid ? 'success' : 'warning'}">${isPaid ? 'PAID' : 'PENDING'}</span></td>
+                <td>${isPaid ? '<span class="text-success">✔ Done</span>' : `<button class="btn btn-sm btn-success" onclick="markPaid(${s.id})">Mark Paid</button>`}</td>
             </tr>`;
         });
         document.getElementById("settlementTable").innerHTML = rows || "<tr><td colspan='5' class='text-center'>No settlements yet.</td></tr>";
@@ -24,16 +32,12 @@ function loadSettlements() {
     .catch(() => {});
 }
 
-// Mark a settlement as PAID
 function markPaid(id) {
-    fetch(API_BASE + "/settlements/" + id + "/PAID", {
-        method: "PUT"
-    })
+    fetch(API_BASE + "/settlements/" + id + "/PAID", { method: "PUT" })
     .then(() => loadSettlements())
     .catch(() => alert("Failed to update settlement"));
 }
 
-// Create new settlement
 document.getElementById("settlementForm")
 .addEventListener("submit", function (e) {
     e.preventDefault();
@@ -54,7 +58,6 @@ document.getElementById("settlementForm")
     .then(() => {
         document.getElementById("settlementForm").reset();
         loadSettlements();
-        alert("Settlement created!");
     })
     .catch(() => alert("Failed to create settlement"));
 });
