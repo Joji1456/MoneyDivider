@@ -4,13 +4,13 @@ if (!user) window.location = "index.html";
 
 loadGroups();
 
-// Add extra member email input
+// Add extra member name input
 function addMemberInput() {
-    const count = document.querySelectorAll(".member-email").length + 1;
+    const count = document.querySelectorAll(".member-name").length + 1;
     const input = document.createElement("input");
-    input.type = "email";
-    input.className = "form-control mb-2 member-email";
-    input.placeholder = "Member " + count + " Email";
+    input.type = "text";
+    input.className = "form-control mb-2 member-name";
+    input.placeholder = "Member " + count + " Name";
     document.getElementById("memberInputs").appendChild(input);
 }
 
@@ -35,25 +35,25 @@ document.getElementById("groupForm")
 .addEventListener("submit", function (e) {
     e.preventDefault();
 
-    const emails = [...document.querySelectorAll(".member-email")].map(i => i.value.trim()).filter(v => v);
+    const names = [...document.querySelectorAll(".member-name")].map(i => i.value.trim()).filter(v => v);
 
-    if (emails.length < 2) {
+    if (names.length < 2) {
         alert("Please add at least 2 members.");
         return;
     }
 
-    // First register/find all member users, then create group
-    const memberPromises = emails.map(email =>
+    // Find or register users by name
+    const memberPromises = names.map(name =>
         fetch(API_BASE + "/users")
         .then(res => res.json())
         .then(users => {
-            const existing = users.find(u => u.email === email);
+            const existing = users.find(u => u.name.toLowerCase() === name.toLowerCase());
             if (existing) return existing;
-            // Register as new user with default password
+            // Register as new user with name and default credentials
             return fetch(API_BASE + "/users/register", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ name: email.split("@")[0], email: email, password: "member123" })
+                body: JSON.stringify({ name: name, email: name.toLowerCase().replace(/\s+/g,".")+"@group.com", password: "member123" })
             }).then(r => r.json());
         })
     );
@@ -78,8 +78,8 @@ document.getElementById("groupForm")
         document.getElementById("groupForm").reset();
         // Reset member inputs to 2
         document.getElementById("memberInputs").innerHTML = `
-            <input type="email" class="form-control mb-2 member-email" placeholder="Member 1 Email" required>
-            <input type="email" class="form-control mb-2 member-email" placeholder="Member 2 Email" required>`;
+            <input type="text" class="form-control mb-2 member-name" placeholder="Member 1 Name" required>
+            <input type="text" class="form-control mb-2 member-name" placeholder="Member 2 Name" required>`;
         loadGroups();
         alert("Group created successfully!");
     })
