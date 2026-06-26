@@ -22,19 +22,22 @@
 <div class="container mt-5">
     <h3>Add Expense</h3>
     <form id="expenseForm" class="mb-4">
-        <input type="text" id="description" class="form-control mb-3" placeholder="Description" required>
-        <input type="number" id="amount" class="form-control mb-3" placeholder="Amount" required>
+        <input type="text" id="description" class="form-control mb-3" placeholder="Description (e.g. Food, Hotel)" required>
+        <input type="number" id="amount" class="form-control mb-3" placeholder="Amount (₹)" step="0.01" required>
+        <select id="groupId" class="form-control mb-3" required>
+            <option value="">-- Select Group --</option>
+        </select>
         <button class="btn btn-success">Add Expense</button>
     </form>
 
     <h3>Expense History</h3>
     <table class="table table-bordered">
-        <thead>
+        <thead class="table-dark">
             <tr>
                 <th>Description</th>
                 <th>Amount</th>
-                <th>Paid By</th>
-                <th>Group</th>
+                <th>Paid By (User ID)</th>
+                <th>Group ID</th>
             </tr>
         </thead>
         <tbody id="expenseTable"></tbody>
