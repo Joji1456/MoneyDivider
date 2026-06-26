@@ -1,72 +1,191 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Money Divider Login</title>
+    <title>Money Divider - Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
-    <link
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-        rel="stylesheet">
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Segoe UI', sans-serif;
+        }
 
+        .login-wrapper {
+            width: 100%;
+            max-width: 420px;
+            padding: 20px;
+        }
 
+        .card {
+            border: none;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+            animation: slideUp 0.5s ease;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            padding: 35px 30px 25px;
+            text-align: center;
+            color: white;
+        }
+
+        .card-header .logo {
+            font-size: 3rem;
+            margin-bottom: 8px;
+        }
+
+        .card-header h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .card-header p {
+            opacity: 0.85;
+            margin: 5px 0 0;
+            font-size: 0.95rem;
+        }
+
+        .card-body {
+            padding: 35px 30px;
+            background: #fff;
+        }
+
+        .input-group-text {
+            background: #f0f0ff;
+            border-right: none;
+            color: #667eea;
+        }
+
+        .form-control {
+            border-left: none;
+            border-radius: 0 8px 8px 0 !important;
+        }
+
+        .form-control:focus {
+            box-shadow: 0 0 0 3px rgba(102,126,234,0.2);
+            border-color: #667eea;
+        }
+
+        .input-group { margin-bottom: 18px; }
+
+        .input-group .input-group-text {
+            border-radius: 8px 0 0 8px;
+        }
+
+        .btn-login {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border: none;
+            border-radius: 10px;
+            padding: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(102,126,234,0.4);
+        }
+
+        .divider {
+            text-align: center;
+            margin: 20px 0;
+            position: relative;
+            color: #aaa;
+            font-size: 0.85rem;
+        }
+
+        .divider::before, .divider::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            width: 40%;
+            height: 1px;
+            background: #eee;
+        }
+
+        .divider::before { left: 0; }
+        .divider::after  { right: 0; }
+
+        .register-link {
+            text-align: center;
+        }
+
+        .register-link a {
+            color: #667eea;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .register-link a:hover { text-decoration: underline; }
+
+        .features {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+            font-size: 0.78rem;
+            color: #888;
+        }
+
+        .features span { text-align: center; }
+        .features i { display: block; font-size: 1.2rem; color: #667eea; margin-bottom: 4px; }
+    </style>
 </head>
-
 <body>
 
-<div class="container mt-5">
+<div class="login-wrapper">
+    <div class="card">
+        <div class="card-header">
+            <div class="logo">💰</div>
+            <h2>Money Divider</h2>
+            <p>Split expenses effortlessly</p>
+        </div>
+        <div class="card-body">
+            <form id="loginForm">
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fa fa-envelope"></i></span>
+                    <input type="email" id="email" class="form-control" placeholder="Enter your email" required>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-text"><i class="fa fa-lock"></i></span>
+                    <input type="password" id="password" class="form-control" placeholder="Enter your password" required>
+                </div>
+                <button class="btn btn-login text-white w-100 mt-2">
+                    <i class="fa fa-sign-in-alt me-2"></i>Login
+                </button>
+            </form>
 
-    <div class="row justify-content-center">
+            <div class="divider">or</div>
 
-        <div class="col-md-4">
-
-            <div class="card p-4">
-
-                <h2 class="text-center text-primary">
-                    Money Divider
-                </h2>
-
-                <form id="loginForm">
-
-                    <div class="mb-3">
-                        <label>Email</label>
-                        <input
-                            type="email"
-                            id="email"
-                            class="form-control"
-                            required>
-                    </div>
-
-                    <div class="mb-3">
-                        <label>Password</label>
-                        <input
-                            type="password"
-                            id="password"
-                            class="form-control"
-                            required>
-                    </div>
-
-                    <button
-                        class="btn btn-primary w-100">
-                        Login
-                    </button>
-
-                    <div class="text-center mt-3">
-                        <a href="register.html">
-                            Create Account
-                        </a>
-                    </div>
-
-                </form>
-
+            <div class="register-link">
+                Don't have an account? <a href="register.html">Create Account</a>
             </div>
 
+            <div class="features">
+                <span><i class="fa fa-users"></i>Groups</span>
+                <span><i class="fa fa-receipt"></i>Expenses</span>
+                <span><i class="fa fa-handshake"></i>Settle Up</span>
+            </div>
         </div>
-
     </div>
-
 </div>
 
 <script src="javascript/config.js"></script>
 <script src="javascript/login.js"></script>
-
 </body>
 </html>
