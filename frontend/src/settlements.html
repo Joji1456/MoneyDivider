@@ -21,23 +21,24 @@
 
 <div class="container mt-5">
 
-    <!-- Pending and Paid summary cards -->
-    <div class="row mb-4">
+    <div class="row mb-2">
         <div class="col-md-6">
-            <div class="card text-white bg-warning p-3 text-center">
+            <div class="card bg-warning text-dark p-3 text-center">
                 <h5>⏳ Pending Settlements</h5>
                 <h2 id="pendingCount">0</h2>
+                <div id="pendingPeople" class="mt-2"></div>
             </div>
         </div>
         <div class="col-md-6">
-            <div class="card text-white bg-success p-3 text-center">
+            <div class="card bg-success text-white p-3 text-center">
                 <h5>✅ Paid Settlements</h5>
                 <h2 id="paidCount">0</h2>
+                <div id="paidPeople" class="mt-2"></div>
             </div>
         </div>
     </div>
 
-    <h3>Create Settlement</h3>
+    <h3 class="mt-4">Create Settlement</h3>
     <form id="settlementForm" class="mb-4">
         <input type="number" id="fromUser" class="form-control mb-3" placeholder="From User ID" required>
         <input type="number" id="toUser" class="form-control mb-3" placeholder="To User ID" required>
@@ -49,8 +50,8 @@
     <table class="table table-bordered">
         <thead class="table-dark">
             <tr>
-                <th>From User</th>
-                <th>To User</th>
+                <th>From</th>
+                <th>To</th>
                 <th>Amount</th>
                 <th>Status</th>
                 <th>Action</th>

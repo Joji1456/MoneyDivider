@@ -2,26 +2,46 @@
 const user = JSON.parse(localStorage.getItem("user"));
 if (!user) window.location = "index.html";
 
-loadSettlements();
+let usersMap = {};
+
+// Load users first, then settlements
+fetch(API_BASE + "/users")
+.then(res => res.json())
+.then(users => {
+    users.forEach(u => usersMap[u.id] = u.name);
+    loadSettlements();
+})
+.catch(() => loadSettlements());
 
 function loadSettlements() {
     fetch(API_BASE + "/settlements")
     .then(res => res.json())
     .then(data => {
-        // Count pending and paid
-        const pendingCount = data.filter(s => s.status !== "PAID").length;
-        const paidCount = data.filter(s => s.status === "PAID").length;
+        const pendingList = data.filter(s => s.status !== "PAID");
+        const paidList = data.filter(s => s.status === "PAID");
 
-        // Show summary counts
-        document.getElementById("pendingCount").innerText = pendingCount;
-        document.getElementById("paidCount").innerText = paidCount;
+        // Update summary cards
+        document.getElementById("pendingCount").innerText = pendingList.length;
+        document.getElementById("paidCount").innerText = paidList.length;
+
+        // Show pending peoples names
+        document.getElementById("pendingPeople").innerHTML = pendingList.length
+            ? pendingList.map(s => `<span class="badge bg-warning text-dark me-1">${usersMap[s.fromUser] || "User "+s.fromUser} → ${usersMap[s.toUser] || "User "+s.toUser} (₹${s.amount})</span>`).join("")
+            : "<small class='text-muted'>None</small>";
+
+        // Show paid peoples names
+        document.getElementById("paidPeople").innerHTML = paidList.length
+            ? paidList.map(s => `<span class="badge bg-success me-1">${usersMap[s.fromUser] || "User "+s.fromUser} → ${usersMap[s.toUser] || "User "+s.toUser} (₹${s.amount})</span>`).join("")
+            : "<small class='text-muted'>None</small>";
 
         let rows = "";
         data.forEach(s => {
             const isPaid = s.status === "PAID";
+            const fromName = usersMap[s.fromUser] || "User " + s.fromUser;
+            const toName = usersMap[s.toUser] || "User " + s.toUser;
             rows += `<tr>
-                <td>User ${s.fromUser}</td>
-                <td>User ${s.toUser}</td>
+                <td>${fromName}</td>
+                <td>${toName}</td>
                 <td>₹${s.amount}</td>
                 <td><span class="badge bg-${isPaid ? 'success' : 'warning'}">${isPaid ? 'PAID' : 'PENDING'}</span></td>
                 <td>${isPaid ? '<span class="text-success">✔ Done</span>' : `<button class="btn btn-sm btn-success" onclick="markPaid(${s.id})">Mark Paid</button>`}</td>
