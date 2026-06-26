@@ -27,7 +27,7 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOriginPatterns(List.of("https://*.netlify.app", "https://moneydivider-production.up.railway.app", "http://localhost:3000", "http://localhost:8080"));
+        config.setAllowedOriginPatterns(List.of("https://money-divider-app.netlify.app", "https://moneydivider-production.up.railway.app", "http://localhost:3000", "http://localhost:8080"));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
