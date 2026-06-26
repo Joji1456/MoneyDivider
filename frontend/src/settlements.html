@@ -20,14 +20,23 @@
 </nav>
 
 <div class="container mt-5">
-    <h3>Settlements</h3>
+    <h3>Create Settlement</h3>
+    <form id="settlementForm" class="mb-4">
+        <input type="number" id="fromUser" class="form-control mb-3" placeholder="From User ID" required>
+        <input type="number" id="toUser" class="form-control mb-3" placeholder="To User ID" required>
+        <input type="number" id="amount" class="form-control mb-3" placeholder="Amount (₹)" step="0.01" required>
+        <button class="btn btn-primary">Create Settlement</button>
+    </form>
+
+    <h3>All Settlements</h3>
     <table class="table table-bordered">
-        <thead>
+        <thead class="table-dark">
             <tr>
-                <th>From</th>
-                <th>To</th>
+                <th>From User</th>
+                <th>To User</th>
                 <th>Amount</th>
                 <th>Status</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody id="settlementTable"></tbody>
