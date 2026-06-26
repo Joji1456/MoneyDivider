@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-@SpringBootApplication(scanBasePackages = {"com.example.moneydivider", "com.moneydivider"})
+@SpringBootApplication(scanBasePackages = "com.moneydivider")
 @EnableJpaRepositories(basePackages = "com.moneydivider.repository")
 @EntityScan(basePackages = "com.moneydivider.model")
 public class MoneydividerApplication {
