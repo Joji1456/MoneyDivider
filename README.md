@@ -2,6 +2,9 @@
 
 MoneyDivider is a full-stack web application that helps users manage and split expenses among friends, roommates, family members, or groups. It simplifies tracking shared expenses and calculates who owes whom, making group expense management easy and transparent.
 
+
+ Live Link: https:  https://money-divider-app.netlify.app
+
 ## 🚀 Features
 
 * User Registration and Login
