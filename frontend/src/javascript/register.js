@@ -1,7 +1,15 @@
 // Register Page - Handles new user registration
+const errorMsg = document.getElementById("errorMsg");
+
+function showError(msg) {
+    errorMsg.textContent = msg;
+    errorMsg.classList.remove("d-none");
+}
+
 document.getElementById("registerForm")
 .addEventListener("submit", function (e) {
     e.preventDefault();
+    errorMsg.classList.add("d-none");
 
     const user = {
         name: document.getElementById("name").value,
@@ -9,7 +17,6 @@ document.getElementById("registerForm")
         password: document.getElementById("password").value
     };
 
-    // Send registration request to backend
     fetch(API_BASE + "/users/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -24,13 +31,12 @@ document.getElementById("registerForm")
         window.location = "index.html";
     })
     .catch(err => {
-        // Show specific error messages to user
         if (err.message.includes("Email already in use")) {
-            alert("This email is already registered. Please login.");
+            showError("This email is already registered. Please login.");
         } else if (err.message === "Failed to fetch") {
-            alert("Cannot connect to server. Please try again in a moment.");
+            showError("Cannot connect to server. Please try again in a moment.");
         } else {
-            alert("Registration failed: " + err.message);
+            showError("Registration failed: " + err.message);
         }
     });
 });
